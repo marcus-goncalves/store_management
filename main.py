@@ -1,7 +1,10 @@
-from ast import If
-from fastapi import FastAPI
-from helpers import router as helper
+import secrets
+from fastapi import Depends, FastAPI, HTTPException, Security, status
+from utils import oauth
 
 app = FastAPI()
 
-app.include_router(helper.router)
+
+@app.get("/users/me")
+def read_current_user(username: str = Depends(oauth.authenticate)) -> dict:
+    return {"username": username}
