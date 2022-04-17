@@ -5,7 +5,7 @@ A personal project to manage a store.
 ## Features Whislist
 
 [x] - Authentication control (application scope)
-[ ] - Database integration (application scope)
+[x] - Database integration (application scope)
 [ ] - Provider management (CRUD)
 [ ] - Stock register management (CRUD)
 [ ] - Sales application (CRUD)
