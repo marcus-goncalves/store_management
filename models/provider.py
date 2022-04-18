@@ -1,5 +1,5 @@
 from lib2to3.pytree import Base
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, constr
 from dataclasses import dataclass
 
 
@@ -14,7 +14,14 @@ class Address:
 
 
 class Provider(BaseModel):
-    provider_name: str
+    provider_name: constr(max_length=50)
     email: EmailStr
-    phone: int
+    phone: constr(max_length=14)
     address: Address
+
+
+class PaginatedProviders(BaseModel):
+    data: list[Provider] | None
+    page_size: int
+    page: int
+    pages: int
