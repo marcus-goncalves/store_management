@@ -1,7 +1,8 @@
 from fastapi import APIRouter, Depends, status
-from models.provider import Provider, PaginatedProviders
 from utils import oauth
-from typing import List
+
+from models.provider import Provider, PaginatedProviders
+import controllers.provider as controller
 
 router = APIRouter(
     prefix="/provider",
@@ -19,11 +20,10 @@ router = APIRouter(
 
 
 @router.post("/",
-             status_code=status.HTTP_201_CREATED,
-             response_model_include={"provider_name"}
+             status_code=status.HTTP_201_CREATED
              )
-async def create_provider(provider: Provider) -> Provider:
-    ...
+async def create_provider(provider: Provider) -> None:
+    controller.insert_provider(provider)
 
 
 @router.get("/",
