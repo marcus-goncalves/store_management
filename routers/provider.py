@@ -22,7 +22,7 @@ router = APIRouter(
 @router.post("/",
              status_code=status.HTTP_201_CREATED
              )
-async def create_provider(provider: Provider) -> None:
+def create_provider(provider: Provider) -> None:
     controller.insert_provider(provider)
 
 
@@ -33,20 +33,22 @@ async def create_provider(provider: Provider) -> None:
 async def read_providers(
         page_size: int = 10,
         page: int = 1) -> PaginatedProviders:
-    ...
+
+    data = controller.get_all_providers(page_size, page)
+    return data
 
 
-@router.put("/{provider_name}",
+@router.put("/{id}",
             status_code=status.HTTP_202_ACCEPTED,
             response_model=Provider
             )
-async def update_provider(provider_name: str, provider: Provider) -> Provider:
-    return {"provider_changed": provider_name, "new_provider": provider}
+def update_provider(id: str, provider: Provider) -> Provider:
+    res = controller.update_provider(id, provider)
+    return res
 
 
-@router.delete("/{provider_name}",
-               status_code=status.HTTP_200_OK,
-               response_model_include={"provider_name"}
+@router.delete("/{id}",
+               status_code=status.HTTP_200_OK
                )
-async def delete_provider(provider_name: str):
-    return {"provider": provider_name}
+def delete_provider(id: str):
+    controller.delete_provider(id)

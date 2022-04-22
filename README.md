@@ -6,7 +6,7 @@ A personal project to manage a store.
 
 [x] - Authentication control (application scope)
 [x] - Database integration (application scope)
-[ ] - Provider management (CRUD)
+[x] - Provider management (CRUD)
 [ ] - Stock register management (CRUD)
 [ ] - Sales application (CRUD)
 [ ] - Metrics for dashboard
