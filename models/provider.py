@@ -23,6 +23,7 @@ class Provider(BaseModel):
     email: EmailStr
     phone_numbers: List[Phone] = None
     address: Address
+    rating: int
     active: bool | None = True
     created_at: Optional[datetime] = datetime.now()
     updated_at: datetime = datetime.now()
