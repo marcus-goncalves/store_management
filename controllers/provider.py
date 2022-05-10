@@ -3,9 +3,6 @@ from fastapi import HTTPException, status
 from models.provider import Provider, PaginatedProviders
 import repositories.provider as repo
 
-providers = []
-
-
 def insert_provider(provider: Provider) -> None:
     try:
         repo.insert(provider.dict())

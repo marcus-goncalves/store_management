@@ -6,7 +6,7 @@ import controllers.provider as controller
 
 router = APIRouter(
     prefix="/provider",
-    tags=["Providers"],
+    tags=["Fornecedores"],
     dependencies=[Depends(oauth.authentication)],
     responses={
         200: {"description": "Request OK"},
@@ -20,6 +20,7 @@ router = APIRouter(
 
 
 @router.post("/",
+             name="Cadastrar um fornecedor",
              status_code=status.HTTP_201_CREATED
              )
 def create_provider(provider: Provider) -> None:
@@ -27,6 +28,7 @@ def create_provider(provider: Provider) -> None:
 
 
 @router.get("/",
+            name="Buscar todos os fornecedores",
             status_code=status.HTTP_200_OK,
             response_model=PaginatedProviders
             )
@@ -39,6 +41,7 @@ async def read_providers(
 
 
 @router.put("/{id}",
+            name="Atualizar um fornecedor pelo ID",
             status_code=status.HTTP_202_ACCEPTED,
             response_model=Provider
             )
@@ -48,6 +51,7 @@ def update_provider(id: str, provider: Provider) -> Provider:
 
 
 @router.delete("/{id}",
+               name="Excluir um fornecedor pelo ID",
                status_code=status.HTTP_200_OK
                )
 def delete_provider(id: str):
