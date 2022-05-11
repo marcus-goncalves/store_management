@@ -19,6 +19,9 @@ def get_all_providers(page_size: int = 10, page: int = 1) -> PaginatedProviders:
     providers = repo.read_all()
 
     pages = round(len(providers) / page_size, 0)
+    if pages == 0:
+        pages = 1
+
     output = {
         "data": providers[start:end],
         "page_size": page_size,

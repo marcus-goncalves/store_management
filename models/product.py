@@ -3,8 +3,11 @@ from pydantic import BaseModel, Field, constr
 from typing import List, Optional
 from datetime import datetime
 
-class ProductSize(Enum):
-    P, M, G, GG = range(4)
+class ProductSize(str, Enum):
+    P: str = "P"
+    M: str = "M"
+    G: str = "G"
+    GG: str = "GG"
 
 
 class Product(BaseModel):
@@ -14,6 +17,7 @@ class Product(BaseModel):
     quantity: int = 1
     size: ProductSize | int
     provider_name: constr(max_length=50)
+    active: bool | None = True
     created_at: Optional[datetime] = datetime.now()
     updated_at: datetime = datetime.now()
 
